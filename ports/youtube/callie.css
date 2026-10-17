@@ -1,0 +1,80 @@
+/* Generated from palettes/callie.toml and callie-light.toml by scripts/generate.py; edit the palette, not this file. */
+/* Callie in YouTube's dark appearance, Callie Light in its light one. */
+html[dark], html[dark] [dark] {
+  --yt-spec-base-background: #1c1220;
+  --yt-spec-raised-background: #261a2a;
+  --yt-spec-menu-background: #261a2a;
+  --yt-spec-inverted-background: #e0d3df;
+  --yt-spec-additive-background: #33243a;
+  --yt-spec-general-background-a: #1c1220;
+  --yt-spec-general-background-b: #261a2a;
+  --yt-spec-general-background-c: #33243a;
+  --yt-spec-brand-background-solid: #1c1220;
+  --yt-spec-brand-background-primary: #1c1220;
+  --yt-spec-brand-background-secondary: #261a2a;
+  --yt-spec-snackbar-background: #33243a;
+  --yt-spec-badge-chip-background: #33243a;
+  --yt-spec-button-chip-background-hover: #3d2c42;
+  --yt-spec-10-percent-layer: #3d2c42;
+  --yt-spec-outline: #3d2c42;
+  --yt-spec-text-primary: #e0d3df;
+  --yt-spec-text-primary-inverse: #1c1220;
+  --yt-spec-text-secondary: #c9b7c6;
+  --yt-spec-text-disabled: #9a8797;
+  --yt-spec-icon-active-other: #c9b7c6;
+  --yt-spec-icon-inactive: #9a8797;
+  --yt-spec-icon-disabled: #9a8797;
+  --yt-spec-call-to-action: #f08fb8;
+  --yt-spec-call-to-action-inverse: #f08fb8;
+  --yt-spec-brand-link-text: #f08fb8;
+  --yt-spec-themed-blue: #f08fb8;
+  --yt-spec-suggested-action: #33243a;
+  --yt-spec-static-brand-red: #f08fb8;
+  --yt-spec-red-indicator: #f08fb8;
+  --yt-spec-error-indicator: #eaaba8;
+  --yt-spec-themed-green: #9dcca3;
+}
+html[dark] .ytp-play-progress, html[dark] .ytp-swatch-background-color {
+  background: #f08fb8 !important;
+}
+html[dark] .ytp-load-progress { background: #3d2c42 !important; }
+html[dark] ::selection { background: #3d2c42; color: #e0d3df; }
+html:not([dark]) {
+  --yt-spec-base-background: #fbf5f8;
+  --yt-spec-raised-background: #fffafc;
+  --yt-spec-menu-background: #fffafc;
+  --yt-spec-inverted-background: #55414e;
+  --yt-spec-additive-background: #f3e7ee;
+  --yt-spec-general-background-a: #fbf5f8;
+  --yt-spec-general-background-b: #fffafc;
+  --yt-spec-general-background-c: #f3e7ee;
+  --yt-spec-brand-background-solid: #fbf5f8;
+  --yt-spec-brand-background-primary: #fbf5f8;
+  --yt-spec-brand-background-secondary: #fffafc;
+  --yt-spec-snackbar-background: #f3e7ee;
+  --yt-spec-badge-chip-background: #f3e7ee;
+  --yt-spec-button-chip-background-hover: #e0ccd7;
+  --yt-spec-10-percent-layer: #e0ccd7;
+  --yt-spec-outline: #e0ccd7;
+  --yt-spec-text-primary: #55414e;
+  --yt-spec-text-primary-inverse: #fbf5f8;
+  --yt-spec-text-secondary: #6b5562;
+  --yt-spec-text-disabled: #8f7a87;
+  --yt-spec-icon-active-other: #6b5562;
+  --yt-spec-icon-inactive: #8f7a87;
+  --yt-spec-icon-disabled: #8f7a87;
+  --yt-spec-call-to-action: #e45f97;
+  --yt-spec-call-to-action-inverse: #e45f97;
+  --yt-spec-brand-link-text: #e45f97;
+  --yt-spec-themed-blue: #e45f97;
+  --yt-spec-suggested-action: #f3e7ee;
+  --yt-spec-static-brand-red: #e45f97;
+  --yt-spec-red-indicator: #e45f97;
+  --yt-spec-error-indicator: #9e5251;
+  --yt-spec-themed-green: #3f7b4a;
+}
+html:not([dark]) .ytp-play-progress, html:not([dark]) .ytp-swatch-background-color {
+  background: #e45f97 !important;
+}
+html:not([dark]) .ytp-load-progress { background: #e0ccd7 !important; }
+html:not([dark]) ::selection { background: #e0ccd7; color: #55414e; }

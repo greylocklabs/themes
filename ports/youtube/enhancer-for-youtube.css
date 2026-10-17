@@ -1,0 +1,49 @@
+/* Generated from palettes/callie.toml by scripts/generate.py; edit the palette, not this file. */
+/* Callie for Enhancer for YouTube's custom theme box; always dark. */
+html:root, [dark] {
+  --yt-spec-base-background: #1c1220;
+  --yt-spec-raised-background: #261a2a;
+  --yt-spec-menu-background: #261a2a;
+  --yt-spec-inverted-background: #e0d3df;
+  --yt-spec-additive-background: #33243a;
+  --yt-spec-general-background-a: #1c1220;
+  --yt-spec-general-background-b: #261a2a;
+  --yt-spec-general-background-c: #33243a;
+  --yt-spec-brand-background-solid: #1c1220;
+  --yt-spec-brand-background-primary: #1c1220;
+  --yt-spec-brand-background-secondary: #261a2a;
+  --yt-spec-snackbar-background: #33243a;
+  --yt-spec-badge-chip-background: #33243a;
+  --yt-spec-button-chip-background-hover: #3d2c42;
+  --yt-spec-10-percent-layer: #3d2c42;
+  --yt-spec-outline: #3d2c42;
+  --yt-spec-text-primary: #e0d3df;
+  --yt-spec-text-primary-inverse: #1c1220;
+  --yt-spec-text-secondary: #c9b7c6;
+  --yt-spec-text-disabled: #9a8797;
+  --yt-spec-icon-active-other: #c9b7c6;
+  --yt-spec-icon-inactive: #9a8797;
+  --yt-spec-icon-disabled: #9a8797;
+  --yt-spec-call-to-action: #f08fb8;
+  --yt-spec-call-to-action-inverse: #f08fb8;
+  --yt-spec-brand-link-text: #f08fb8;
+  --yt-spec-themed-blue: #f08fb8;
+  --yt-spec-suggested-action: #33243a;
+  --yt-spec-static-brand-red: #f08fb8;
+  --yt-spec-red-indicator: #f08fb8;
+  --yt-spec-error-indicator: #eaaba8;
+  --yt-spec-themed-green: #9dcca3;
+}
+html .ytp-play-progress, html .ytp-swatch-background-color {
+  background: #f08fb8 !important;
+}
+html .ytp-load-progress { background: #3d2c42 !important; }
+html ::selection { background: #3d2c42; color: #e0d3df; }
+html {
+  --efyt-accent-color: #f08fb8;
+  --main-color: #f08fb8;
+}
+* {
+  scrollbar-color: #5b4c5c transparent !important;
+  scrollbar-width: thin !important;
+}

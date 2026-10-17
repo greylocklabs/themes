@@ -46,6 +46,11 @@ Each port has a file per variant under `ports/`.
 - **Discord:** with Vencord or BetterDiscord, both client mods Discord does not support, add
   `ports/discord/callie.theme.css` to their themes folder. It is a flavor of
   [refact0r's midnight](https://github.com/refact0r/midnight-discord), which it loads.
+- **YouTube:** for Enhancer for YouTube, pick the custom theme and paste
+  `ports/youtube/enhancer-for-youtube.css` into its box; it is always dark, with Callie's pink as
+  the accent and for the scrollbars. For YouTube Enhancer, or any extension that adds custom CSS,
+  paste `ports/youtube/callie.css`, which follows YouTube's own appearance setting: Callie when
+  YouTube is dark, Callie Light when it is light.
 - **gh-dash:** merge `ports/gh-dash/callie.yml` into `~/.config/gh-dash/config.yml`. gh-dash
   needs every color set, so keep the whole `theme` section. Its companion gh-enhance only takes
   [bubbletint](https://lrstanley.github.io/bubbletint/) themes; `ENHANCE_THEME=rose_pine` is the

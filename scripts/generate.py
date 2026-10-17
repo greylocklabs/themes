@@ -555,6 +555,57 @@ def gh_dash(t):
     return {f"gh-dash/{t.name}.yml": "\n".join(lines) + "\n"}
 
 
+YOUTUBE = {
+    "--yt-spec-base-background": "bg", "--yt-spec-raised-background": "surface",
+    "--yt-spec-menu-background": "surface", "--yt-spec-inverted-background": "fg",
+    "--yt-spec-additive-background": "surface_alt", "--yt-spec-general-background-a": "bg",
+    "--yt-spec-general-background-b": "surface", "--yt-spec-general-background-c": "surface_alt",
+    "--yt-spec-brand-background-solid": "bg", "--yt-spec-brand-background-primary": "bg",
+    "--yt-spec-brand-background-secondary": "surface", "--yt-spec-snackbar-background": "surface_alt",
+    "--yt-spec-badge-chip-background": "surface_alt", "--yt-spec-button-chip-background-hover": "border",
+    "--yt-spec-10-percent-layer": "border", "--yt-spec-outline": "border",
+    "--yt-spec-text-primary": "fg", "--yt-spec-text-primary-inverse": "bg",
+    "--yt-spec-text-secondary": "muted", "--yt-spec-text-disabled": "faint",
+    "--yt-spec-icon-active-other": "muted", "--yt-spec-icon-inactive": "faint",
+    "--yt-spec-icon-disabled": "faint", "--yt-spec-call-to-action": "accent",
+    "--yt-spec-call-to-action-inverse": "accent", "--yt-spec-brand-link-text": "accent",
+    "--yt-spec-themed-blue": "accent", "--yt-spec-suggested-action": "surface_alt",
+    "--yt-spec-static-brand-red": "accent", "--yt-spec-red-indicator": "accent",
+    "--yt-spec-error-indicator": "red", "--yt-spec-themed-green": "green",
+}
+
+
+def youtube(dark, light):
+    """CSS for YouTube Enhancer's custom CSS box: Callie in YouTube's dark mode, Callie Light otherwise."""
+    # YouTube sets its colors on html[dark] and on inner [dark] elements, so the variables go on
+    # the same selectors; scope prefixes the rules for the player and selection.
+    def block(t, selector, scope):
+        r = roles(t)
+        out = [f"{selector} {{"] + [f"  {k}: {r[v]};" for k, v in YOUTUBE.items()] + ["}"]
+        out += [f"{scope} .ytp-play-progress, {scope} .ytp-swatch-background-color {{",
+                f"  background: {r['accent']} !important;", "}",
+                f"{scope} .ytp-load-progress {{ background: {r['border']} !important; }}",
+                f"{scope} ::selection {{ background: {r['selection']}; color: {r['fg']}; }}"]
+        return "\n".join(out)
+
+    text = (f"/* {HEADER.format(file='callie.toml and callie-light.toml')} */\n"
+            "/* Callie in YouTube's dark appearance, Callie Light in its light one. */\n"
+            + block(dark, "html[dark], html[dark] [dark]", "html[dark]") + "\n"
+            + block(light, "html:not([dark])", "html:not([dark])") + "\n")
+
+    # Enhancer for YouTube's custom theme replaces its built-in dark themes, so this one is
+    # always dark, sets its accent variable, and draws thin scrollbars in it.
+    r = roles(dark)
+    enhancer = (f"/* {HEADER.format(file='callie.toml')} */\n"
+                "/* Callie for Enhancer for YouTube's custom theme box; always dark. */\n"
+                + block(dark, "html:root, [dark]", "html") + "\n"
+                + f"html {{\n  --efyt-accent-color: {r['accent']};\n  --main-color: {r['accent']};\n}}\n"
+                + "* {\n"
+                + f"  scrollbar-color: {mix(r['bg'], r['comment'], 0.5)} transparent !important;\n"
+                + "  scrollbar-width: thin !important;\n}\n")
+    return {"youtube/callie.css": text, "youtube/enhancer-for-youtube.css": enhancer}
+
+
 PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, preview]
 
 
@@ -571,7 +622,7 @@ def main():
         for port in PORTS:
             files.update(port(theme))
     # The editor ports hold both variants in one file.
-    for port in (opencode, neovim, css, palette_json):
+    for port in (opencode, neovim, css, palette_json, youtube):
         files.update(port(Theme("callie"), Theme("callie-light")))
 
     stale = []
