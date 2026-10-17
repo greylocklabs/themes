@@ -1,0 +1,57 @@
+# Callie Light: the default theme's pinks, stickers and type on warm, light
+# backgrounds. Anything not set here comes from callie.toml.
+
+[theme]
+name = "Callie Light"
+variant = "light"
+
+[colors]
+background = "#fbf5f8"
+surface = "#fffafc"
+surface-alt = "#f3e7ee"
+hairline = "#efe2e9"
+border = "#e0ccd7"
+text = "#2b1a26"
+text-muted = "#6b5562"
+text-faint = "#8f7a87"
+accent = "#e45f97"
+accent-text = "#2e0f20"
+danger = "#c93c45"
+edge = "#dcc8d3"
+accent-edge = "#a83a6d"
+
+# Stickers keep their pastel fill, with ink and edge tuned for a light page.
+[calendar]
+lightness = 0.88
+chroma = 0.07
+ink-lightness = 0.3
+ink-chroma = 0.07
+edge-lightness = 0.72
+edge-chroma = 0.08
+
+[shadow]
+color = "#5c2a47"
+opacity = 0.18
+blur = 30
+offset = 10
+
+# ANSI colors at OKLCH lightness 0.47 and chroma 0.13 (bright 0.54 and 0.14),
+# dark enough to read on the light page.
+[terminal]
+black = "#2b1a26"
+red = "#963638"
+green = "#046e30"
+yellow = "#715700"
+blue = "#1e5ba1"
+magenta = "#8f3560"
+cyan = "#08686c"
+white = "#8f7a87"
+bright-black = "#6b5562"
+bright-red = "#b14748"
+bright-green = "#17843f"
+bright-yellow = "#896a01"
+bright-blue = "#2d6fbe"
+bright-magenta = "#aa4675"
+bright-cyan = "#0a7e83"
+bright-white = "#dcc8d3"
+selection = "#e0ccd7"
