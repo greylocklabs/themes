@@ -1,0 +1,16 @@
+# Generated from palettes/callie-light.toml by scripts/generate.py; edit the palette, not this file.
+
+[colors]
+foreground = "#2b1a26"
+background = "#fbf5f8"
+cursor_bg = "#e45f97"
+cursor_fg = "#2e0f20"
+cursor_border = "#e45f97"
+selection_fg = "#2b1a26"
+selection_bg = "#e0ccd7"
+ansi = ["#2b1a26", "#963638", "#046e30", "#715700", "#1e5ba1", "#8f3560", "#08686c", "#8f7a87"]
+brights = ["#6b5562", "#b14748", "#17843f", "#896a01", "#2d6fbe", "#aa4675", "#0a7e83", "#dcc8d3"]
+
+[metadata]
+name = "Callie Light"
+origin_url = "https://github.com/greylocklabs/themes"

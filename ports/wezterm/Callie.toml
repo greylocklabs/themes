@@ -1,0 +1,16 @@
+# Generated from palettes/callie.toml by scripts/generate.py; edit the palette, not this file.
+
+[colors]
+foreground = "#f6eef5"
+background = "#1c1220"
+cursor_bg = "#f08fb8"
+cursor_fg = "#2e0f20"
+cursor_border = "#f08fb8"
+selection_fg = "#f6eef5"
+selection_bg = "#3d2c42"
+ansi = ["#33243a", "#f4918e", "#76c788", "#d1ac4e", "#7cb4fc", "#ec90b7", "#30c8cf", "#c9b7c6"]
+brights = ["#9a8797", "#febab6", "#9ee1ab", "#e9ca80", "#aed1fe", "#feb5d2", "#76e2e7", "#f6eef5"]
+
+[metadata]
+name = "Callie"
+origin_url = "https://github.com/greylocklabs/themes"

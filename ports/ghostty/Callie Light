@@ -1,0 +1,23 @@
+# Generated from palettes/callie-light.toml by scripts/generate.py; edit the palette, not this file.
+palette = 0=#2b1a26
+palette = 1=#963638
+palette = 2=#046e30
+palette = 3=#715700
+palette = 4=#1e5ba1
+palette = 5=#8f3560
+palette = 6=#08686c
+palette = 7=#8f7a87
+palette = 8=#6b5562
+palette = 9=#b14748
+palette = 10=#17843f
+palette = 11=#896a01
+palette = 12=#2d6fbe
+palette = 13=#aa4675
+palette = 14=#0a7e83
+palette = 15=#dcc8d3
+background = #fbf5f8
+foreground = #2b1a26
+cursor-color = #e45f97
+cursor-text = #2e0f20
+selection-background = #e0ccd7
+selection-foreground = #2b1a26

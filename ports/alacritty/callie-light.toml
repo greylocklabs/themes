@@ -1,0 +1,33 @@
+# Callie Light: Generated from palettes/callie-light.toml by scripts/generate.py; edit the palette, not this file.
+
+[colors.primary]
+background = "#fbf5f8"
+foreground = "#2b1a26"
+
+[colors.cursor]
+text = "#2e0f20"
+cursor = "#e45f97"
+
+[colors.selection]
+text = "#2b1a26"
+background = "#e0ccd7"
+
+[colors.normal]
+black = "#2b1a26"
+red = "#963638"
+green = "#046e30"
+yellow = "#715700"
+blue = "#1e5ba1"
+magenta = "#8f3560"
+cyan = "#08686c"
+white = "#8f7a87"
+
+[colors.bright]
+black = "#6b5562"
+red = "#b14748"
+green = "#17843f"
+yellow = "#896a01"
+blue = "#2d6fbe"
+magenta = "#aa4675"
+cyan = "#0a7e83"
+white = "#dcc8d3"
