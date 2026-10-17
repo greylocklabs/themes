@@ -73,7 +73,7 @@ def roles(t):
         "fg": t.fg, "bg": t.bg, "muted": c["text-muted"], "faint": c["text-faint"],
         "surface": c["surface"], "surface_alt": c["surface-alt"], "border": c["border"],
         "hairline": c["hairline"], "edge": c["edge"], "accent": c["accent"],
-        "accent_text": c["accent-text"], "selection": t.selection,
+        "accent_text": c["accent-text"], "accent_edge": c["accent-edge"], "selection": t.selection,
         "red": term["red"], "green": term["green"], "yellow": term["yellow"], "blue": term["blue"],
         "magenta": term["magenta"], "cyan": term["cyan"], "comment": term["bright-black"],
         "added_bg": mix(t.bg, term["green"], 0.16), "removed_bg": mix(t.bg, term["red"], 0.16),
@@ -390,7 +390,29 @@ def palette_json(dark, light):
     return {"json/callie.json": json.dumps(body, indent=2) + "\n"}
 
 
-PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, preview]
+def tuicr(t):
+    r = roles(t)
+    keys = {
+        "panel_bg": "bg", "bg_highlight": "surface_alt", "fg_primary": "fg", "fg_secondary": "muted",
+        "fg_dim": "faint", "diff_add": "green", "diff_add_bg": "added_bg", "diff_del": "red",
+        "diff_del_bg": "removed_bg", "diff_context": "fg", "diff_hunk_header": "blue",
+        "expanded_context_fg": "faint", "syntax_add_bg": "added_bg", "syntax_del_bg": "removed_bg",
+        "file_added": "green", "file_modified": "yellow", "file_deleted": "red",
+        "file_renamed": "magenta", "reviewed": "green", "pending": "yellow",
+        "comment_note": "blue", "comment_suggestion": "cyan", "comment_issue": "red",
+        "comment_praise": "green", "border_focused": "accent", "border_unfocused": "border",
+        "status_bar_bg": "surface", "cursor_color": "accent", "cursor_line_bg": "surface",
+        "branch_name": "magenta", "help_indicator": "faint", "message_info_fg": "bg",
+        "message_info_bg": "blue", "message_warning_fg": "bg", "message_warning_bg": "yellow",
+        "message_error_fg": "bg", "message_error_bg": "red", "update_badge_fg": "accent_text",
+        "update_badge_bg": "accent", "mode_fg": "accent_text", "mode_bg": "accent",
+    }
+    lines = [f"# {t.title}: {HEADER.format(file=t.file)}"]
+    lines += [f'{k} = "{r[v]}"' for k, v in keys.items()]
+    return {f"tuicr/{t.name}.toml": "\n".join(lines) + "\n"}
+
+
+PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, preview]
 
 
 def main():

@@ -11,6 +11,7 @@
   --callie-edge: #dcc8d3;
   --callie-accent: #e45f97;
   --callie-accent-text: #2e0f20;
+  --callie-accent-edge: #a83a6d;
   --callie-selection: #e0ccd7;
   --callie-red: #963638;
   --callie-green: #046e30;
@@ -38,6 +39,7 @@
     --callie-edge: #140c17;
     --callie-accent: #f08fb8;
     --callie-accent-text: #2e0f20;
+    --callie-accent-edge: #a64b7a;
     --callie-selection: #3d2c42;
     --callie-red: #f4918e;
     --callie-green: #76c788;
@@ -65,6 +67,7 @@
   --callie-edge: #140c17;
   --callie-accent: #f08fb8;
   --callie-accent-text: #2e0f20;
+  --callie-accent-edge: #a64b7a;
   --callie-selection: #3d2c42;
   --callie-red: #f4918e;
   --callie-green: #76c788;

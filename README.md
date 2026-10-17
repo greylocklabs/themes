@@ -32,8 +32,10 @@ Each port has a file per variant under `ports/`.
   which-key, indent-blankline, neo-tree, nvim-tree, blink.cmp and nvim-cmp.
 - **opencode:** copy `ports/opencode/callie.json` to `~/.config/opencode/themes/`, and set
   `"theme": "callie"` in `tui.json`. It follows the terminal's light or dark mode.
+- **tuicr:** copy `ports/tuicr/*.toml` to `~/.config/tuicr/themes/`, and set `theme = "callie"`, or
+  `theme_dark = "callie"` and `theme_light = "callie-light"` to follow the system.
 - **Programs that use the terminal's colors,** such as lazygit, follow whichever terminal theme
-  is set. For ghzinga, set `theme = "terminal"`; for Claude Code, pick an "ANSI colors only" theme
+  is set. For ghzinga and herdr, set the theme to `"terminal"`; for Claude Code, pick an "ANSI colors only" theme
   in `/theme`.
 
 ### For your own projects
