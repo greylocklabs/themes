@@ -1,0 +1,58 @@
+/**
+ * @name Callie Light
+ * @description Callie Light, from greylocklabs/themes, on the midnight theme.
+ * @author Greylock Labs
+ * @website https://greylocklabs.org/brand/
+ * @source https://github.com/greylocklabs/themes
+*/
+/* Generated from palettes/callie-light.toml by scripts/generate.py; edit the palette, not this file. */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+    --colors: on;
+    --text-0: #2e0f20;
+    --text-1: #2b1a26;
+    --text-2: #55414e;
+    --text-3: #6b5562;
+    --text-4: #8f7a87;
+    --text-5: #c5b8c0;
+    --bg-1: #e0ccd7;
+    --bg-2: #f3e7ee;
+    --bg-3: #fffafc;
+    --bg-4: #fbf5f8;
+    --hover: color-mix(in srgb, #6b5562 8%, transparent);
+    --active: color-mix(in srgb, #6b5562 16%, transparent);
+    --active-2: color-mix(in srgb, #6b5562 24%, transparent);
+    --message-hover: color-mix(in srgb, black 10%, transparent);
+    --accent-1: #e45f97;
+    --accent-2: #e771a3;
+    --accent-3: #ea83ae;
+    --accent-4: #ec95ba;
+    --accent-5: #efa7c6;
+    --accent-new: var(--accent-2);
+    --red-1: #9e5251;
+    --red-2: #a96665;
+    --red-3: #b47979;
+    --red-4: #bf8d8d;
+    --red-5: #cba0a1;
+    --green-1: #3f7b4a;
+    --green-2: #568a5f;
+    --green-3: #6c9874;
+    --green-4: #83a789;
+    --green-5: #99b69e;
+    --blue-1: #4b6ba6;
+    --blue-2: #607cb0;
+    --blue-3: #758cba;
+    --blue-4: #8a9dc4;
+    --blue-5: #9fadcd;
+    --yellow-1: #886518;
+    --yellow-2: #967633;
+    --yellow-3: #a4884e;
+    --yellow-4: #b19969;
+    --yellow-5: #bfaa84;
+    --purple-1: #985270;
+    --purple-2: #a46680;
+    --purple-3: #b07991;
+    --purple-4: #bc8da1;
+    --purple-5: #c8a0b1;
+}

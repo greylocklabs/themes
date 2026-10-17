@@ -34,9 +34,22 @@ Each port has a file per variant under `ports/`.
   `"theme": "callie"` in `tui.json`. It follows the terminal's light or dark mode.
 - **tuicr:** copy `ports/tuicr/*.toml` to `~/.config/tuicr/themes/`, and set `theme = "callie"`, or
   `theme_dark = "callie"` and `theme_light = "callie-light"` to follow the system.
-- **Programs that use the terminal's colors,** such as lazygit, follow whichever terminal theme
-  is set. For ghzinga and herdr, set the theme to `"terminal"`; for Claude Code, pick an "ANSI colors only" theme
-  in `/theme`.
+- **herdr:** replace the `[theme]` section of `~/.config/herdr/config.toml` with
+  `ports/herdr/callie.toml`, which keeps herdr's terminal theme and gives it Callie's pink accent
+  and rows.
+- **Claude Code:** copy `ports/claude-code/*.json` to `~/.claude/themes/`, then pick Callie in
+  `/theme`. Claude's code and dialog borders use the warm yellow rather than the default blue.
+- **lazygit:** merge `ports/lazygit/callie.yml` into `~/.config/lazygit/config.yml`, for a soft
+  selected row and a pink border in place of the terminal's blue.
+- **Slack:** paste the line in `ports/slack/callie.txt` into a message to yourself, then click the
+  theme button Slack shows, or paste it under Preferences, Themes.
+- **Discord:** with Vencord or BetterDiscord, both client mods Discord does not support, add
+  `ports/discord/callie.theme.css` to their themes folder. It is a flavor of
+  [refact0r's midnight](https://github.com/refact0r/midnight-discord), which it loads.
+- **gh-dash:** merge `ports/gh-dash/callie.yml` into `~/.config/gh-dash/config.yml`. gh-dash
+  needs every color set, so keep the whole `theme` section. Its companion gh-enhance only takes
+  [bubbletint](https://lrstanley.github.io/bubbletint/) themes; `ENHANCE_THEME=rose_pine` is the
+  closest.
 
 ### For your own projects
 

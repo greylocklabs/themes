@@ -63,24 +63,26 @@ duration = 200
 duration-slow = 280
 bounce = 1.2
 
-# The 16 ANSI colors for terminals and editors. Each hue sits at one OKLCH
-# lightness and chroma (0.76 and 0.12, bright 0.85 and 0.10), so none stands out
-# from the rest; red starts from danger and magenta from accent.
+# The 16 ANSI colors and the text color for terminals and editors, softer than
+# the app: each hue sits at OKLCH lightness 0.80 and chroma 0.075 (bright 0.87
+# and 0.06), and text is a step below the app's, so long reading does not glare.
+# Red starts from danger and magenta from accent.
 [terminal]
+foreground = "#e0d3df"
 black = "#33243a"
-red = "#f4918e"
-green = "#76c788"
-yellow = "#d1ac4e"
-blue = "#7cb4fc"
-magenta = "#ec90b7"
-cyan = "#30c8cf"
+red = "#eaaba8"
+green = "#9dcca3"
+yellow = "#d6ba86"
+blue = "#a4beef"
+magenta = "#e5aac1"
+cyan = "#82cdcd"
 white = "#c9b7c6"
 bright-black = "#9a8797"
-bright-red = "#febab6"
-bright-green = "#9ee1ab"
-bright-yellow = "#e9ca80"
-bright-blue = "#aed1fe"
-bright-magenta = "#feb5d2"
-bright-cyan = "#76e2e7"
+bright-red = "#fac5c2"
+bright-green = "#bae0be"
+bright-yellow = "#e8d1a8"
+bright-blue = "#bfd5fd"
+bright-magenta = "#f5c5d7"
+bright-cyan = "#a6e1e1"
 bright-white = "#f6eef5"
 selection = "#3d2c42"

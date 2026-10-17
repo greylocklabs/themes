@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="624" height="240" viewBox="0 0 624 240">
 <rect width="100%" height="100%" rx="16" fill="#fbf5f8"/>
-<text x="24" y="44" font-family="Nunito, sans-serif" font-size="22" font-weight="800" fill="#2b1a26">Callie Light</text>
+<text x="24" y="44" font-family="Nunito, sans-serif" font-size="22" font-weight="800" fill="#55414e">Callie Light</text>
 <text x="600" y="44" text-anchor="end" font-family="Nunito, sans-serif" font-size="16" fill="#6b5562">light</text>
 <rect x="28" y="68" width="64" height="64" rx="11" fill="#2b1a26"/>
-<rect x="100" y="68" width="64" height="64" rx="11" fill="#963638"/>
-<rect x="172" y="68" width="64" height="64" rx="11" fill="#046e30"/>
-<rect x="244" y="68" width="64" height="64" rx="11" fill="#715700"/>
-<rect x="316" y="68" width="64" height="64" rx="11" fill="#1e5ba1"/>
-<rect x="388" y="68" width="64" height="64" rx="11" fill="#8f3560"/>
-<rect x="460" y="68" width="64" height="64" rx="11" fill="#08686c"/>
+<rect x="100" y="68" width="64" height="64" rx="11" fill="#9e5251"/>
+<rect x="172" y="68" width="64" height="64" rx="11" fill="#3f7b4a"/>
+<rect x="244" y="68" width="64" height="64" rx="11" fill="#886518"/>
+<rect x="316" y="68" width="64" height="64" rx="11" fill="#4b6ba6"/>
+<rect x="388" y="68" width="64" height="64" rx="11" fill="#985270"/>
+<rect x="460" y="68" width="64" height="64" rx="11" fill="#027c7d"/>
 <rect x="532" y="68" width="64" height="64" rx="11" fill="#8f7a87"/>
 <rect x="28" y="140" width="64" height="64" rx="11" fill="#6b5562"/>
-<rect x="100" y="140" width="64" height="64" rx="11" fill="#b14748"/>
-<rect x="172" y="140" width="64" height="64" rx="11" fill="#17843f"/>
-<rect x="244" y="140" width="64" height="64" rx="11" fill="#896a01"/>
-<rect x="316" y="140" width="64" height="64" rx="11" fill="#2d6fbe"/>
-<rect x="388" y="140" width="64" height="64" rx="11" fill="#aa4675"/>
-<rect x="460" y="140" width="64" height="64" rx="11" fill="#0a7e83"/>
+<rect x="100" y="140" width="64" height="64" rx="11" fill="#8a4140"/>
+<rect x="172" y="140" width="64" height="64" rx="11" fill="#2d6a39"/>
+<rect x="244" y="140" width="64" height="64" rx="11" fill="#755402"/>
+<rect x="316" y="140" width="64" height="64" rx="11" fill="#3b5993"/>
+<rect x="388" y="140" width="64" height="64" rx="11" fill="#85415f"/>
+<rect x="460" y="140" width="64" height="64" rx="11" fill="#006869"/>
 <rect x="532" y="140" width="64" height="64" rx="11" fill="#dcc8d3"/>
 </svg>

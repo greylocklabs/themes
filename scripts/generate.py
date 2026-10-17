@@ -36,7 +36,8 @@ class Theme:
 
     @property
     def fg(self):
-        return self.colors["text"]
+        # Terminals and editors take a softer text color than the app, when the palette has one.
+        return self.terminal.get("foreground", self.colors["text"])
 
     @property
     def bg(self):
@@ -185,7 +186,8 @@ def preview(t):
 
 
 OPENCODE = {
-    "primary": "accent", "secondary": "blue", "accent": "magenta", "error": "red",
+    # secondary colors the Build agent's name, prompt border and spinner.
+    "primary": "accent", "secondary": "magenta", "accent": "cyan", "error": "red",
     "warning": "yellow", "success": "green", "info": "cyan", "text": "fg", "textMuted": "muted",
     "selectedListItemText": "accent_text", "background": "bg", "backgroundPanel": "surface",
     "backgroundElement": "surface_alt", "backgroundMenu": "surface", "border": "border",
@@ -386,7 +388,7 @@ def palette_json(dark, light):
     body = {"generated": HEADER.format(file="callie.toml and callie-light.toml")}
     for t in (dark, light):
         body[t.name] = {"name": t.title, "variant": t.variant, "colors": t.colors,
-                        "terminal": t.terminal, "roles": roles(t)}
+                        "terminal": t.terminal, "roles": roles(t), "slack": slack_colors(t)}
     return {"json/callie.json": json.dumps(body, indent=2) + "\n"}
 
 
@@ -412,7 +414,148 @@ def tuicr(t):
     return {f"tuicr/{t.name}.toml": "\n".join(lines) + "\n"}
 
 
-PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, preview]
+def herdr(t):
+    """A [theme] section for herdr's config.toml: its terminal theme with Callie's accent and rows."""
+    r = roles(t)
+    # overlay0 and overlay1 draw the scrollbars' tracks and thumbs, and dim text.
+    r["overlay0"] = mix(t.bg, r["comment"], 0.5)
+    r["overlay1"] = mix(t.bg, r["comment"], 0.75)
+    keys = {
+        "accent": "accent", "text": "fg", "subtext0": "muted", "panel_bg": None,
+        "sidebar_bg": "bg", "active_row_bg": "surface_alt", "selection_bg": "selection",
+        "surface0": "surface_alt", "surface1": "border", "surface_dim": "surface",
+        "overlay0": "overlay0", "overlay1": "overlay1", "mauve": "magenta", "green": "green",
+        "yellow": "yellow", "red": "red", "blue": "blue", "teal": "cyan", "peach": "yellow",
+    }
+    lines = [f"# {t.title}: {HEADER.format(file=t.file)}",
+             "# Replace the [theme] section of ~/.config/herdr/config.toml with this.",
+             "[theme]", 'name = "terminal"', "", "[theme.custom]"]
+    for key, role in keys.items():
+        lines.append(f'{key} = "reset"' if role is None else f'{key} = "{r[role]}"')
+    return {f"herdr/{t.name}.toml": "\n".join(lines) + "\n"}
+
+
+def claude_code(t):
+    """A Claude Code custom theme, for ~/.claude/themes/."""
+    import json
+    r = roles(t)
+    term = t.terminal
+    # Pastel stand-ins for the subagent colors Callie has no ANSI slot for.
+    purple, orange = (("#c6b3ef", "#ebb898") if t.variant == "dark" else ("#6f58a6", "#9a5c2e"))
+    overrides = {
+        "claude": r["accent"], "claudeShimmer": term["bright-magenta"], "text": r["fg"],
+        "inverseText": r["bg"], "inactive": r["comment"], "inactiveShimmer": r["muted"],
+        "subtle": r["border"], "suggestion": r["magenta"],
+        # Draws dialog borders, and code in Claude's replies, which reads best warm.
+        "permission": r["yellow"], "permissionShimmer": term["bright-yellow"],
+        "remember": r["cyan"], "success": r["green"], "error": r["red"], "warning": r["yellow"],
+        "warningShimmer": term["bright-yellow"], "merged": r["magenta"],
+        "promptBorder": r["comment"], "promptBorderShimmer": r["muted"], "planMode": r["cyan"],
+        "autoAccept": r["magenta"], "bashBorder": r["accent"], "ide": r["blue"],
+        "fastMode": r["yellow"], "fastModeShimmer": term["bright-yellow"],
+        "diffAdded": r["added_bg"], "diffRemoved": r["removed_bg"],
+        "diffAddedDimmed": mix(t.bg, term["green"], 0.08), "diffRemovedDimmed": mix(t.bg, term["red"], 0.08),
+        "diffAddedWord": r["added_hl"], "diffRemovedWord": r["removed_hl"],
+        "userMessageBackground": r["surface"], "userMessageBackgroundHover": r["surface_alt"],
+        "bashMessageBackgroundColor": r["surface"], "memoryBackgroundColor": r["surface"],
+        "selectionBg": r["selection"], "composerSidebarBackground": r["surface"],
+        "rate_limit_fill": r["accent"], "rate_limit_empty": r["border"],
+        "briefLabelYou": r["accent"], "briefLabelClaude": r["magenta"],
+        "red_FOR_SUBAGENTS_ONLY": r["red"], "blue_FOR_SUBAGENTS_ONLY": r["blue"],
+        "green_FOR_SUBAGENTS_ONLY": r["green"], "yellow_FOR_SUBAGENTS_ONLY": r["yellow"],
+        "purple_FOR_SUBAGENTS_ONLY": purple, "orange_FOR_SUBAGENTS_ONLY": orange,
+        "pink_FOR_SUBAGENTS_ONLY": r["accent"], "cyan_FOR_SUBAGENTS_ONLY": r["cyan"],
+    }
+    body = {"name": t.title, "base": t.variant, "overrides": overrides}
+    return {f"claude-code/{t.name}.json": json.dumps(body, indent=2) + "\n"}
+
+
+def slack_colors(t):
+    """Slack's sidebar theme: ten colors pasted as one comma-separated line."""
+    r = roles(t)
+    order = ["bg", "surface_alt", "accent", "accent_text", "surface_alt", "fg", "green", "red",
+             "edge", "fg"]
+    return ",".join(r[k] for k in order)
+
+
+def slack(t):
+    return {f"slack/{t.name}.txt": slack_colors(t) + "\n"}
+
+
+def discord(t):
+    """A flavor of refact0r's Midnight theme for Vencord or BetterDiscord, in Callie's colors."""
+    r, term = roles(t), t.terminal
+
+    def scale(color, toward):
+        return [mix(color, toward, a) for a in (0.0, 0.12, 0.24, 0.36, 0.48)]
+
+    lines = [
+        "/**", f" * @name {t.title}", f" * @description {t.title}, from greylocklabs/themes, on the midnight theme.",
+        " * @author Greylock Labs", " * @website https://greylocklabs.org/brand/",
+        " * @source https://github.com/greylocklabs/themes", "*/",
+        f"/* {HEADER.format(file=t.file)} */",
+        "@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');", "",
+        ":root {", "    --colors: on;",
+        f"    --text-0: {r['accent_text']};", f"    --text-1: {t.colors['text']};", f"    --text-2: {r['fg']};",
+        f"    --text-3: {r['muted']};", f"    --text-4: {r['faint']};",
+        f"    --text-5: {mix(r['bg'], r['faint'], 0.5)};",
+        f"    --bg-1: {r['border']};", f"    --bg-2: {r['surface_alt']};", f"    --bg-3: {r['surface']};",
+        f"    --bg-4: {r['bg']};",
+        f"    --hover: color-mix(in srgb, {r['muted']} 8%, transparent);",
+        f"    --active: color-mix(in srgb, {r['muted']} 16%, transparent);",
+        f"    --active-2: color-mix(in srgb, {r['muted']} 24%, transparent);",
+        "    --message-hover: color-mix(in srgb, black 10%, transparent);",
+    ]
+    for i, c in enumerate(scale(r["accent"], r["bg"]), 1):
+        lines.append(f"    --accent-{i}: {c};")
+    lines.append("    --accent-new: var(--accent-2);")
+    hues = {"red": "red", "green": "green", "blue": "blue", "yellow": "yellow", "purple": "magenta"}
+    for name, role in hues.items():
+        for i, c in enumerate(scale(term[f"bright-{role}"] if t.variant == "dark" else r[role], r["bg"]), 1):
+            lines.append(f"    --{name}-{i}: {c};")
+    lines.append("}")
+    return {f"discord/{t.name}.theme.css": "\n".join(lines) + "\n"}
+
+
+def lazygit(t):
+    """The gui.theme section of lazygit's config.yml."""
+    r = roles(t)
+    theme = {
+        "activeBorderColor": [r["accent"], "bold"], "inactiveBorderColor": [r["border"]],
+        "searchingActiveBorderColor": [r["yellow"], "bold"], "optionsTextColor": [r["blue"]],
+        "selectedLineBgColor": [r["surface_alt"]], "inactiveViewSelectedLineBgColor": [r["surface"]],
+        "cherryPickedCommitFgColor": [r["accent_text"]], "cherryPickedCommitBgColor": [r["cyan"]],
+        "markedBaseCommitFgColor": [r["accent_text"]], "markedBaseCommitBgColor": [r["yellow"]],
+        "unstagedChangesColor": [r["red"]], "defaultFgColor": [r["fg"]],
+    }
+    lines = [f"# {t.title}: {HEADER.format(file=t.file)}", "gui:", "  theme:"]
+    for key, value in theme.items():
+        lines.append(f"    {key}:")
+        lines += [f'      - "{v}"' for v in value]
+    return {f"lazygit/{t.name}.yml": "\n".join(lines) + "\n"}
+
+
+def gh_dash(t):
+    """The theme section of gh-dash's config.yml; it needs every color set."""
+    r = roles(t)
+    colors = {
+        "text": {"primary": r["fg"], "secondary": r["muted"], "inverted": r["accent_text"],
+                 "faint": r["faint"], "warning": r["yellow"], "success": r["green"],
+                 "error": r["red"], "actor": r["magenta"]},
+        "background": {"selected": r["surface_alt"]},
+        "border": {"primary": r["accent"], "secondary": r["border"], "faint": r["hairline"]},
+        "icon": {"newcontributor": r["cyan"], "contributor": r["blue"],
+                 "collaborator": r["magenta"], "member": r["magenta"], "owner": r["accent"],
+                 "unknownrole": r["faint"]},
+    }
+    lines = [f"# {t.title}: {HEADER.format(file=t.file)}", "theme:", "  colors:"]
+    for group, values in colors.items():
+        lines.append(f"    {group}:")
+        lines += [f'      {k}: "{v}"' for k, v in values.items()]
+    return {f"gh-dash/{t.name}.yml": "\n".join(lines) + "\n"}
+
+
+PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, preview]
 
 
 def main():

@@ -1,0 +1,29 @@
+# Callie Light: Generated from palettes/callie-light.toml by scripts/generate.py; edit the palette, not this file.
+gui:
+  theme:
+    activeBorderColor:
+      - "#e45f97"
+      - "bold"
+    inactiveBorderColor:
+      - "#e0ccd7"
+    searchingActiveBorderColor:
+      - "#886518"
+      - "bold"
+    optionsTextColor:
+      - "#4b6ba6"
+    selectedLineBgColor:
+      - "#f3e7ee"
+    inactiveViewSelectedLineBgColor:
+      - "#fffafc"
+    cherryPickedCommitFgColor:
+      - "#2e0f20"
+    cherryPickedCommitBgColor:
+      - "#027c7d"
+    markedBaseCommitFgColor:
+      - "#2e0f20"
+    markedBaseCommitBgColor:
+      - "#886518"
+    unstagedChangesColor:
+      - "#9e5251"
+    defaultFgColor:
+      - "#55414e"

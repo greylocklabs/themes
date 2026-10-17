@@ -1,0 +1,25 @@
+# Callie: Generated from palettes/callie.toml by scripts/generate.py; edit the palette, not this file.
+theme:
+  colors:
+    text:
+      primary: "#e0d3df"
+      secondary: "#c9b7c6"
+      inverted: "#2e0f20"
+      faint: "#9a8797"
+      warning: "#d6ba86"
+      success: "#9dcca3"
+      error: "#eaaba8"
+      actor: "#e5aac1"
+    background:
+      selected: "#33243a"
+    border:
+      primary: "#f08fb8"
+      secondary: "#3d2c42"
+      faint: "#2c2031"
+    icon:
+      newcontributor: "#82cdcd"
+      contributor: "#a4beef"
+      collaborator: "#e5aac1"
+      member: "#e5aac1"
+      owner: "#f08fb8"
+      unknownrole: "#9a8797"
