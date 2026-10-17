@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  commitlint:
+    uses: greylocklabs/.github/.github/workflows/commitlint.yml@v1
+
+  markdownlint:
+    uses: greylocklabs/.github/.github/workflows/markdownlint.yml@v1
+
+  ports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check the ports match the palettes
+        run: scripts/generate.py --check
