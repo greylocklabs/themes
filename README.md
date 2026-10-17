@@ -23,6 +23,9 @@ Each port has a file per variant under `ports/`.
 - **WezTerm:** copy `ports/wezterm/*.toml` to `~/.config/wezterm/colors/`, and set
   `config.color_scheme = "Callie"`.
 
+- **Gogh, and anything that reads iTerm2-Color-Schemes' YAML:** `ports/gogh/Callie.yml` and
+  `Callie Light.yml`.
+
 ### Editors and apps
 
 - **Neovim:** install this repository as a plugin, for example with lazy.nvim:
@@ -53,8 +56,8 @@ Each port has a file per variant under `ports/`.
   YouTube is dark, Callie Light when it is light.
 - **gh-dash:** merge `ports/gh-dash/callie.yml` into `~/.config/gh-dash/config.yml`. gh-dash
   needs every color set, so keep the whole `theme` section. Its companion gh-enhance only takes
-  [bubbletint](https://lrstanley.github.io/bubbletint/) themes; `ENHANCE_THEME=rose_pine` is the
-  closest.
+  [bubbletint](https://lrstanley.github.io/bubbletint/)'s own themes, none of them Callie;
+  `ENHANCE_THEME=dracula_plus` keeps its focus color lavender rather than teal.
 
 ### For your own projects
 

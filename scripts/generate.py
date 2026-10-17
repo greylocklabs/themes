@@ -465,6 +465,19 @@ def claude_code(t):
         "green_FOR_SUBAGENTS_ONLY": r["green"], "yellow_FOR_SUBAGENTS_ONLY": r["yellow"],
         "purple_FOR_SUBAGENTS_ONLY": purple, "orange_FOR_SUBAGENTS_ONLY": orange,
         "pink_FOR_SUBAGENTS_ONLY": r["accent"], "cyan_FOR_SUBAGENTS_ONLY": r["cyan"],
+        # Tokens the docs leave out: background tasks and shells, the system spinner, the
+        # mascot, and the ultrathink rainbow.
+        "background": r["magenta"], "claudeBlue_FOR_SYSTEM_SPINNER": r["accent"],
+        "claudeBlueShimmer_FOR_SYSTEM_SPINNER": term["bright-magenta"],
+        "professionalBlue": r["magenta"], "chromeYellow": r["yellow"], "effortUltra": r["accent"],
+        "clawd_body": r["accent"], "clawd_background": r["bg"],
+        "rainbow_red": r["red"], "rainbow_orange": orange, "rainbow_yellow": r["yellow"],
+        "rainbow_green": r["green"], "rainbow_blue": r["blue"], "rainbow_indigo": purple,
+        "rainbow_violet": r["magenta"], "rainbow_red_shimmer": term["bright-red"],
+        "rainbow_orange_shimmer": mix(orange, "#ffffff", 0.25),
+        "rainbow_yellow_shimmer": term["bright-yellow"], "rainbow_green_shimmer": term["bright-green"],
+        "rainbow_blue_shimmer": term["bright-blue"], "rainbow_indigo_shimmer": mix(purple, "#ffffff", 0.25),
+        "rainbow_violet_shimmer": term["bright-magenta"],
     }
     body = {"name": t.title, "base": t.variant, "overrides": overrides}
     return {f"claude-code/{t.name}.json": json.dumps(body, indent=2) + "\n"}
@@ -606,7 +619,38 @@ def youtube(dark, light):
     return {"youtube/callie.css": text, "youtube/enhancer-for-youtube.css": enhancer}
 
 
-PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, preview]
+def gogh(t):
+    """The YAML that Gogh and iTerm2-Color-Schemes take, which most terminals' theme lists come from."""
+    lines = [f"# {HEADER.format(file=t.file)}", f'name: "{t.title}"',
+             'author: "Greylock Labs (https://github.com/greylocklabs/themes)"',
+             f'variant: "{t.variant}"', ""]
+    lines += [f'color_{i:02d}: "{c}"' for i, c in enumerate(t.normal, 1)] + [""]
+    lines += [f'color_{i:02d}: "{c}"' for i, c in enumerate(t.bright, 9)] + [""]
+    lines += [f'background: "{t.bg}"', f'foreground: "{t.fg}"', f'cursor: "{t.cursor}"',
+              f'cursor_text: "{t.cursor_text}"', f'selection: "{t.selection}"',
+              f'selection_text: "{t.fg}"']
+    return {f"gogh/{t.title}.yml": "\n".join(lines) + "\n"}
+
+
+def gh_enhance(t):
+    """A bubbletint theme file for gh-enhance's ENHANCE_THEME. gh-enhance draws focus in
+    bright blue, so the blue slots carry Callie's pink."""
+    import json
+    r, term = roles(t), t.terminal
+    body = {
+        "display_name": t.title, "id": t.name, "dark": t.variant == "dark",
+        "fg": r["fg"], "bg": r["bg"], "selection_bg": r["selection"], "cursor": r["accent"],
+        "black": term["black"], "red": r["red"], "green": r["green"], "yellow": r["yellow"],
+        "blue": r["magenta"], "purple": r["magenta"], "cyan": r["cyan"], "white": term["white"],
+        "bright_black": term["bright-black"], "bright_red": term["bright-red"],
+        "bright_green": r["green"], "bright_yellow": term["bright-yellow"],
+        "bright_blue": r["accent"], "bright_purple": term["bright-magenta"],
+        "bright_cyan": term["bright-cyan"], "bright_white": term["bright-white"],
+    }
+    return {f"gh-enhance/{t.name}.json": json.dumps(body, indent=2) + "\n"}
+
+
+PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, gh_enhance, gogh, preview]
 
 
 def main():
