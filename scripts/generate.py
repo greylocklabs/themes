@@ -361,6 +361,187 @@ vim.cmd("runtime colors/callie.lua")
     return {"../colors/callie.lua": text, "../colors/callie-light.lua": light_file}
 
 
+# Faces as (fg, bg, style) in terms of roles(), as for Neovim; style also takes extend.
+EMACS = {
+    "default": ("fg", "bg", ""), "cursor": (None, "accent", ""), "region": (None, "selection", "extend"),
+    "secondary-selection": (None, "surface_alt", "extend"), "highlight": (None, "surface_alt", ""),
+    "hl-line": (None, "surface", "extend"), "fringe": ("faint", "bg", ""),
+    "line-number": ("faint", "bg", ""), "line-number-current-line": ("accent", "bg", "bold"),
+    "vertical-border": ("border", None, ""), "window-divider": ("border", None, ""),
+    "window-divider-first-pixel": ("border", None, ""), "window-divider-last-pixel": ("border", None, ""),
+    "fill-column-indicator": ("hairline", None, ""), "shadow": ("faint", None, ""),
+    "mode-line": ("fg", "surface_alt", ""), "mode-line-inactive": ("faint", "surface", ""),
+    "mode-line-highlight": ("accent", None, ""), "mode-line-emphasis": ("accent", None, "bold"),
+    "mode-line-buffer-id": ("fg", None, "bold"), "header-line": ("muted", "surface", ""),
+    "minibuffer-prompt": ("accent", None, "bold"), "tooltip": ("fg", "surface", ""),
+    "link": ("blue", None, "underline"), "link-visited": ("magenta", None, "underline"),
+    "error": ("red", None, "bold"), "warning": ("yellow", None, ""), "success": ("green", None, ""),
+    "escape-glyph": ("accent", None, ""), "homoglyph": ("accent", None, ""),
+    "help-key-binding": ("accent", "surface_alt", ""), "match": ("accent_text", "yellow", ""),
+    "isearch": ("accent_text", "accent", "bold"), "lazy-highlight": ("accent_text", "yellow", ""),
+    "isearch-fail": ("accent_text", "red", ""), "show-paren-match": ("accent", "surface_alt", "bold"),
+    "show-paren-mismatch": ("accent_text", "red", "bold"), "trailing-whitespace": (None, "removed_bg", ""),
+    "whitespace-trailing": ("faint", "removed_bg", ""), "whitespace-line": ("yellow", None, ""),
+    "whitespace-tab": ("hairline", None, ""), "whitespace-space": ("hairline", None, ""),
+    "whitespace-newline": ("hairline", None, ""), "whitespace-empty": (None, "surface", ""),
+    "whitespace-indentation": ("hairline", None, ""), "whitespace-space-after-tab": ("hairline", None, ""),
+    "tab-bar": ("muted", "edge", ""), "tab-bar-tab": ("accent_text", "accent", "bold"),
+    "tab-bar-tab-inactive": ("muted", "surface", ""), "tab-line": ("muted", "edge", ""),
+    "completions-common-part": ("accent", None, "bold"), "completions-first-difference": ("fg", None, "bold"),
+    "completions-annotations": ("faint", None, "italic"),
+    "font-lock-comment-face": ("comment", None, "italic"),
+    "font-lock-comment-delimiter-face": ("comment", None, "italic"),
+    "font-lock-doc-face": ("muted", None, "italic"), "font-lock-doc-markup-face": ("accent", None, ""),
+    "font-lock-string-face": ("green", None, ""), "font-lock-keyword-face": ("magenta", None, ""),
+    "font-lock-builtin-face": ("blue", None, ""), "font-lock-function-name-face": ("blue", None, ""),
+    "font-lock-function-call-face": ("blue", None, ""), "font-lock-variable-name-face": ("fg", None, ""),
+    "font-lock-variable-use-face": ("fg", None, ""), "font-lock-property-name-face": ("fg", None, ""),
+    "font-lock-property-use-face": ("fg", None, ""), "font-lock-constant-face": ("yellow", None, ""),
+    "font-lock-number-face": ("yellow", None, ""), "font-lock-type-face": ("cyan", None, ""),
+    "font-lock-preprocessor-face": ("accent", None, ""), "font-lock-warning-face": ("yellow", None, "bold"),
+    "font-lock-negation-char-face": ("red", None, ""), "font-lock-escape-face": ("accent", None, ""),
+    "font-lock-regexp-grouping-backslash": ("accent", None, ""),
+    "font-lock-regexp-grouping-construct": ("accent", None, ""),
+    "font-lock-operator-face": ("muted", None, ""), "font-lock-punctuation-face": ("muted", None, ""),
+    "font-lock-bracket-face": ("muted", None, ""), "font-lock-delimiter-face": ("muted", None, ""),
+    "font-lock-misc-punctuation-face": ("muted", None, ""),
+    "flymake-error": (None, None, ""), "flymake-warning": (None, None, ""), "flymake-note": (None, None, ""),
+    "flycheck-error": (None, None, ""), "flycheck-warning": (None, None, ""),
+    "flycheck-info": (None, None, ""), "flyspell-incorrect": (None, None, ""),
+    "flyspell-duplicate": (None, None, ""), "compilation-error": ("red", None, ""),
+    "compilation-warning": ("yellow", None, ""), "compilation-info": ("cyan", None, ""),
+    "compilation-line-number": ("faint", None, ""), "eldoc-highlight-function-argument": ("accent", None, "bold"),
+    "lsp-face-highlight-textual": (None, "surface_alt", ""), "lsp-face-highlight-read": (None, "surface_alt", ""),
+    "lsp-face-highlight-write": (None, "surface_alt", "bold"), "lsp-inlay-hint-face": ("faint", None, "italic"),
+    "lsp-ui-doc-background": (None, "surface", ""), "lsp-ui-peek-peek": (None, "surface", ""),
+    "lsp-ui-peek-list": (None, "surface", ""), "lsp-ui-peek-selection": ("accent_text", "accent", "bold"),
+    "lsp-ui-peek-highlight": ("accent", None, "bold"), "lsp-ui-peek-header": ("fg", "surface_alt", "bold"),
+    "diff-added": (None, "added_bg", "extend"), "diff-removed": (None, "removed_bg", "extend"),
+    "diff-changed": (None, "changed_bg", "extend"), "diff-refine-added": (None, "added_hl", ""),
+    "diff-refine-removed": (None, "removed_hl", ""), "diff-refine-changed": (None, "added_hl", ""),
+    "diff-header": ("muted", "surface", ""), "diff-file-header": ("accent", "surface", "bold"),
+    "diff-hunk-header": ("blue", "surface", ""), "diff-indicator-added": ("green", None, ""),
+    "diff-indicator-removed": ("red", None, ""), "diff-hl-insert": ("green", "green", ""),
+    "diff-hl-delete": ("red", "red", ""), "diff-hl-change": ("blue", "blue", ""),
+    "magit-section-heading": ("accent", None, "bold"), "magit-section-highlight": (None, "surface", "extend"),
+    "magit-branch-local": ("blue", None, ""), "magit-branch-remote": ("green", None, ""),
+    "magit-branch-current": ("blue", None, "bold"), "magit-tag": ("yellow", None, ""),
+    "magit-hash": ("faint", None, ""), "magit-dimmed": ("faint", None, ""),
+    "magit-log-author": ("cyan", None, ""), "magit-log-date": ("faint", None, ""),
+    "magit-diff-file-heading": ("fg", None, "bold"), "magit-diff-context": ("faint", None, "extend"),
+    "magit-diff-context-highlight": ("muted", "surface", "extend"),
+    "magit-diff-hunk-heading": ("muted", "surface_alt", "extend"),
+    "magit-diff-hunk-heading-highlight": ("fg", "border", "extend"),
+    "magit-diff-added": ("green", "added_bg", "extend"), "magit-diff-removed": ("red", "removed_bg", "extend"),
+    "magit-diff-added-highlight": ("green", "added_hl", "extend"),
+    "magit-diff-removed-highlight": ("red", "removed_hl", "extend"),
+    "vertico-current": (None, "surface_alt", "extend"), "orderless-match-face-0": ("accent", None, "bold"),
+    "orderless-match-face-1": ("blue", None, "bold"), "orderless-match-face-2": ("cyan", None, "bold"),
+    "orderless-match-face-3": ("yellow", None, "bold"), "corfu-default": ("fg", "surface", ""),
+    "corfu-current": ("accent_text", "accent", "bold"), "corfu-border": (None, "border", ""),
+    "corfu-bar": (None, "border", ""), "which-key-key-face": ("accent", None, ""),
+    "which-key-group-description-face": ("blue", None, ""),
+    "which-key-command-description-face": ("fg", None, ""), "which-key-separator-face": ("faint", None, ""),
+    "centaur-tabs-default": (None, "edge", ""), "centaur-tabs-selected": ("fg", "bg", "bold"),
+    "centaur-tabs-unselected": ("muted", "surface", ""), "centaur-tabs-selected-modified": ("fg", "bg", "bold"),
+    "centaur-tabs-unselected-modified": ("muted", "surface", ""),
+    "centaur-tabs-active-bar-face": (None, "accent", ""),
+    "centaur-tabs-modified-marker-selected": ("accent", "bg", ""),
+    "centaur-tabs-modified-marker-unselected": ("accent", "surface", ""),
+    "doom-modeline-bar": (None, "accent", ""), "doom-modeline-bar-inactive": (None, "surface", ""),
+    "doom-modeline-buffer-modified": ("accent", None, "bold"), "doom-modeline-project-dir": ("blue", None, "bold"),
+    "doom-modeline-info": ("green", None, ""), "doom-modeline-warning": ("yellow", None, ""),
+    "doom-modeline-urgent": ("red", None, "bold"), "doom-modeline-evil-normal-state": ("accent", None, ""),
+    "doom-modeline-evil-insert-state": ("green", None, ""), "doom-modeline-evil-visual-state": ("yellow", None, ""),
+    "doom-modeline-evil-replace-state": ("red", None, ""), "doom-modeline-evil-emacs-state": ("magenta", None, ""),
+    "dashboard-banner-logo-title": ("accent", None, "bold"), "dashboard-heading": ("blue", None, "bold"),
+    "dashboard-items-face": ("fg", None, ""), "dired-directory": ("blue", None, ""),
+    "dired-symlink": ("cyan", None, ""), "dired-header": ("accent", None, "bold"),
+    "dired-flagged": ("red", None, ""), "dired-marked": ("yellow", None, "bold"),
+    "treemacs-root-face": ("accent", None, "bold"), "treemacs-directory-face": ("blue", None, ""),
+    "treemacs-file-face": ("fg", None, ""), "treemacs-git-modified-face": ("yellow", None, ""),
+    "treemacs-git-added-face": ("green", None, ""), "treemacs-git-untracked-face": ("faint", None, ""),
+    "org-document-title": ("accent", None, "bold"), "org-document-info": ("muted", None, ""),
+    "org-level-1": ("accent", None, "bold"), "org-level-2": ("blue", None, "bold"),
+    "org-level-3": ("cyan", None, "bold"), "org-level-4": ("magenta", None, "bold"),
+    "org-level-5": ("yellow", None, ""), "org-level-6": ("green", None, ""),
+    "org-level-7": ("accent", None, ""), "org-level-8": ("blue", None, ""),
+    "org-block": (None, "surface", "extend"), "org-block-begin-line": ("faint", "surface", "italic extend"),
+    "org-block-end-line": ("faint", "surface", "italic extend"), "org-code": ("green", None, ""),
+    "org-verbatim": ("green", None, ""), "org-quote": ("muted", None, "italic"),
+    "org-todo": ("yellow", None, "bold"), "org-done": ("faint", None, "bold"),
+    "org-headline-done": ("faint", None, ""), "org-link": ("blue", None, "underline"),
+    "org-date": ("cyan", None, ""), "org-tag": ("faint", None, ""), "org-meta-line": ("faint", None, ""),
+    "org-table": ("muted", None, ""), "markdown-header-face": ("accent", None, "bold"),
+    "markdown-code-face": ("green", "surface", "extend"), "markdown-inline-code-face": ("green", None, ""),
+    "markdown-link-face": ("cyan", None, ""), "markdown-url-face": ("blue", None, "underline"),
+    "markdown-blockquote-face": ("muted", None, "italic"), "markdown-list-face": ("accent", None, ""),
+    "markdown-markup-face": ("faint", None, ""),
+}
+EMACS_WAVE = {"flymake-error": "red", "flymake-warning": "yellow", "flymake-note": "cyan",
+              "flycheck-error": "red", "flycheck-warning": "yellow", "flycheck-info": "cyan",
+              "flyspell-incorrect": "red", "flyspell-duplicate": "yellow"}
+EMACS_STYLE = {"bold": ":weight bold", "italic": ":slant italic", "underline": ":underline t",
+               "extend": ":extend t"}
+EMACS_DOC = {"dark": "Callie's pink accent on a dark, warm purple background.",
+             "light": "Callie's pinks on a warm, light background."}
+
+
+def emacs(t):
+    """A deftheme per variant. Both are in the callie family, so theme-choose-variant swaps them."""
+    r = roles(t)
+    faces = []
+    for face, (fg, bg, style) in EMACS.items():
+        spec = []
+        if fg:
+            spec.append(f':foreground "{r[fg]}"')
+        if bg:
+            spec.append(f':background "{r[bg]}"')
+        if face in EMACS_WAVE:
+            spec.append(f':underline (:style wave :color "{r[EMACS_WAVE[face]]}")')
+        spec += [EMACS_STYLE[s] for s in style.split()]
+        faces.append(f" '({face} ((t ({' '.join(spec)}))))")
+    names = [f"ansi-color-{c}" for c in ANSI] + [f"ansi-color-bright-{c}" for c in ANSI]
+    faces += [f" '({n} ((t (:foreground \"{c}\" :background \"{c}\"))))"
+              for n, c in zip(names, t.normal + t.bright)]
+    faces_text = "\n".join(faces)
+    file = f"{t.name}-theme.el"
+    text = f""";;; {file} --- {t.title} theme -*- lexical-binding: t; -*-
+
+;; {HEADER.format(file=t.file)}
+
+;; URL: https://github.com/greylocklabs/themes
+;; Package-Requires: ((emacs "29.1"))
+
+;;; Commentary:
+
+;; {t.title} for Emacs.  Callie and Callie Light share the callie theme
+;; family, so `theme-choose-variant' switches between them.
+
+;;; Code:
+
+(deftheme {t.name}
+  "{EMACS_DOC[t.variant]}"
+  :background-mode '{t.variant}
+  :kind 'color-scheme
+  :family 'callie)
+
+(custom-theme-set-faces
+ '{t.name}
+{faces_text})
+
+;;;###autoload
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
+
+(provide-theme '{t.name})
+
+;;; {file} ends here
+"""
+    return {f"emacs/{file}": text}
+
+
 def css(dark, light):
     """CSS variables, light by default and dark when the system or data-theme asks."""
     def block(t, indent):
@@ -708,7 +889,7 @@ def tmtheme(t):
     return {f"tmtheme/{t.name}.tmTheme": text}
 
 
-PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, gh_enhance, gogh, tmtheme, preview]
+PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, gh_enhance, gogh, tmtheme, emacs, preview]
 
 
 def main():

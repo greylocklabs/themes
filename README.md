@@ -33,6 +33,15 @@ Each port has a file per variant under `ports/`.
   `callie` follows `background`, so `:set background=light` switches to Callie Light; `callie-light`
   sets it for you. It covers Treesitter, LSP and diagnostics, gitsigns, Telescope, bufferline,
   which-key, indent-blankline, neo-tree, nvim-tree, blink.cmp and nvim-cmp.
+- **Emacs 29+:** install `ports/emacs/` as a package, for example with straight.el, naming the
+  clone so it does not collide with doom-themes' `themes`:
+  `(straight-use-package '(callie-theme :host github :repo "greylocklabs/themes"
+  :local-repo "greylocklabs-themes" :files ("ports/emacs/*.el")))`,
+  or copy `ports/emacs/*.el` to `custom-theme-directory`. Then `(load-theme 'callie t)`, or
+  `callie-light`. To switch between them with `theme-choose-variant`, load the other first with
+  `(load-theme 'callie-light t t)`, which loads it without enabling it. It covers font-lock and
+  tree-sitter, flymake and flycheck, lsp-mode, magit, diff-hl, vertico, corfu, orderless,
+  which-key, centaur-tabs, doom-modeline, dashboard, treemacs, Org and Markdown.
 - **opencode:** copy `ports/opencode/callie.json` to `~/.config/opencode/themes/`, and set
   `"theme": "callie"` in `tui.json`. It follows the terminal's light or dark mode.
 - **tuicr:** copy `ports/tuicr/*.toml` to `~/.config/tuicr/themes/`, and set `theme = "callie"`, or
