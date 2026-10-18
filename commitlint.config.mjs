@@ -5,6 +5,7 @@ const scopes = [
   "ports", // the generator and what it writes under ports/
   "ci",
   "deps",
+  "deps-dev", // Dependabot's updates to development dependencies
 ];
 
 /** @type {import('@commitlint/types').UserConfig} */
