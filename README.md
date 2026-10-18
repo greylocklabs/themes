@@ -54,6 +54,10 @@ Each port has a file per variant under `ports/`.
   the accent and for the scrollbars. For YouTube Enhancer, or any extension that adds custom CSS,
   paste `ports/youtube/callie.css`, which follows YouTube's own appearance setting: Callie when
   YouTube is dark, Callie Light when it is light.
+- **Codex, bat, and other tools that read TextMate themes:** `ports/tmtheme/callie.tmTheme` and
+  `callie-light.tmTheme`. For Codex, copy them to `~/.codex/themes/` and pick Callie in `/theme`,
+  or set `theme = "callie"` under `[tui]`; for bat, copy them to `$(bat --config-dir)/themes/`
+  and run `bat cache --build`.
 - **gh-dash:** merge `ports/gh-dash/callie.yml` into `~/.config/gh-dash/config.yml`. gh-dash
   needs every color set, so keep the whole `theme` section. Its companion gh-enhance only takes
   [bubbletint](https://lrstanley.github.io/bubbletint/)'s own themes, none of them Callie;

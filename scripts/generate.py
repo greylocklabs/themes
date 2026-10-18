@@ -650,7 +650,65 @@ def gh_enhance(t):
     return {f"gh-enhance/{t.name}.json": json.dumps(body, indent=2) + "\n"}
 
 
-PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, gh_enhance, gogh, preview]
+TMTHEME_SCOPES = [
+    ("Comment", "comment, punctuation.definition.comment", "comment", "italic"),
+    ("String", "string, punctuation.definition.string", "green", ""),
+    ("Escape", "constant.character.escape, string.regexp", "accent", ""),
+    ("Constant", "constant, constant.numeric, constant.language, support.constant", "yellow", ""),
+    ("Keyword", "keyword, keyword.control, storage, storage.type, storage.modifier", "magenta", ""),
+    ("Operator", "keyword.operator, punctuation", "muted", ""),
+    ("Function", "entity.name.function, support.function, meta.function-call", "blue", ""),
+    ("Type", "entity.name.type, entity.name.class, support.type, support.class", "cyan", ""),
+    ("Parameter", "variable.parameter", "fg", "italic"),
+    ("Built-in variable", "variable.language", "red", ""),
+    ("Tag", "entity.name.tag", "magenta", ""),
+    ("Attribute", "entity.other.attribute-name", "blue", ""),
+    ("Heading", "markup.heading, entity.name.section", "accent", "bold"),
+    ("Bold", "markup.bold", "fg", "bold"),
+    ("Italic", "markup.italic", "fg", "italic"),
+    ("Link", "markup.underline.link, string.other.link", "blue", "underline"),
+    ("Code", "markup.raw, markup.inline.raw", "green", ""),
+    ("Quote", "markup.quote", "muted", "italic"),
+    ("Inserted", "markup.inserted", "green", ""),
+    ("Deleted", "markup.deleted", "red", ""),
+    ("Changed", "markup.changed", "blue", ""),
+    ("Diff header", "meta.diff.header, meta.diff.range, meta.diff.index", "accent", ""),
+    ("Invalid", "invalid", "red", "underline"),
+]
+
+
+def tmtheme(t):
+    """A TextMate theme, which syntect-based tools such as Codex and bat read."""
+    from xml.sax.saxutils import escape
+    r = roles(t)
+
+    def entry(name, scope, settings):
+        body = "".join(f"<key>{k}</key><string>{escape(v)}</string>" for k, v in settings.items())
+        head = (f"<key>name</key><string>{escape(name)}</string><key>scope</key>"
+                f"<string>{escape(scope)}</string>") if name else ""
+        return f"    <dict>{head}<key>settings</key><dict>{body}</dict></dict>"
+
+    items = [entry("", "", {"background": r["bg"], "foreground": r["fg"], "caret": r["accent"],
+                            "selection": r["selection"], "lineHighlight": r["surface"],
+                            "gutterForeground": r["faint"], "invisibles": r["border"]})]
+    for name, scope, role, style in TMTHEME_SCOPES:
+        settings = {"foreground": r[role]}
+        if style:
+            settings["fontStyle"] = style
+        items.append(entry(name, scope, settings))
+    text = "\n".join([
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" '
+        '"http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
+        f"<!-- {HEADER.format(file=t.file)} -->",
+        '<plist version="1.0">', "<dict>",
+        f"  <key>name</key><string>{t.title}</string>",
+        "  <key>settings</key>", "  <array>", *items, "  </array>",
+        "</dict>", "</plist>", ""])
+    return {f"tmtheme/{t.name}.tmTheme": text}
+
+
+PORTS = [kitty, konsole, ghostty, alacritty, foot, wezterm, tuicr, herdr, claude_code, slack, discord, lazygit, gh_dash, gh_enhance, gogh, tmtheme, preview]
 
 
 def main():
