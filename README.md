@@ -10,6 +10,10 @@ apps, for your terminal, editor and projects: a dark **Callie** and a light **Ca
 
 Each port has a file per variant under `ports/`.
 
+Both are also in [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes), for
+iTerm2 and the many terminals it has files for. Ghostty and WezTerm bundle that collection, so once
+their bundled copy has Callie, setting the theme is enough, with nothing to copy.
+
 - **kitty:** copy `ports/kitty/callie.conf` and `callie-light.conf` to `~/.config/kitty/`, and add
   `include callie.conf` to `kitty.conf`. To follow the desktop's light or dark setting, copy them
   as `dark-theme.auto.conf` and `light-theme.auto.conf` instead.
